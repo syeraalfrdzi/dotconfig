@@ -23,9 +23,6 @@ def mappings(home):
     for source in sorted((ROOT / 'home').iterdir()):
         if source.is_file():
             targets.append((str(source.relative_to(ROOT)), home / source.name))
-    vscode = ROOT / 'apps/vscode'
-    for source in sorted(vscode.rglob('*.json')):
-        targets.append((str(source.relative_to(ROOT)), home / 'Library/Application Support/Code/User' / source.relative_to(vscode)))
     return targets
 
 

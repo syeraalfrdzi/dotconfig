@@ -23,11 +23,11 @@ automatically in the background.
 | `config/herdr-app/` | Shortcuts and preferences for the Herdr desktop app |
 | `config/skhd/` | Shortcuts for resizing/moving windows, desktops, and monitors, plus helper scripts |
 | `config/yabai/` | yabai floating layout and mouse controls |
-| `apps/vscode/` | Settings, keybindings, tasks, profiles, snippets, extension list |
 | `config/opencode/` | OpenCode theme, session view, and MCP servers (Figma, Playwright) |
 | `apps/claude-code/` | Claude Code status line script and media/ping watcher |
 | `Brewfile` | Packages required by this configuration |
 | `inventory/` | Homebrew packages, Codex preferences, and Herdr layout/theme references |
+| `inventory/wallpaper/` | The desktop wallpaper in use (`rural.jpg`); a reference snapshot, not installed automatically |
 
 This repo does not include TickTick tokens, GitHub logins, Keychain, `.azure`,
 `.gnupg`, terminal history, caches, logs, application databases, or any personal
@@ -191,7 +191,7 @@ history does not reveal a timezone.
 Install Homebrew and the GitHub CLI, log in to GitHub, then:
 
 ```zsh
-gh repo clone <your-github-username>/dotconfig ~/.config/dotconfig
+gh repo clone <owner>/dotconfig ~/.config/dotconfig  # <owner> = the account that owns this repo, or your fork
 cd ~/.config/dotconfig
 zsh bootstrap.sh
 exec zsh
@@ -201,14 +201,6 @@ Open `nvim` to restore the plugins. The GitHub CLI and other apps need to be log
 again. `inventory/homebrew-*.txt` lists the packages on the source Mac; it is not an
 automatic installation of every app and service. `inventory/codex-preferences.toml` is
 a reference; the Codex runtime integration is still managed by the app.
-
-If VS Code is available, restore the extensions with:
-
-```zsh
-while IFS= read -r extension; do
-  code --install-extension "$extension"
-done < apps/vscode/extensions.txt
-```
 
 Spicetify Marketplace is an add-on app package, not configuration; reinstall it by
 following the official instructions at https://github.com/spicetify/marketplace before
