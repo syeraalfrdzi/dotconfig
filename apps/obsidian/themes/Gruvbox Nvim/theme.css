@@ -1,0 +1,340 @@
+/*
+ * Gruvbox Nvim — Obsidian theme that mirrors ellisonleao/gruvbox.nvim
+ *
+ * Palette and role mapping are taken from gruvbox.nvim itself (lua/gruvbox.lua,
+ * get_colors()): the --gb-* names below are the same bg0..bg4 / fg0..fg4 / red..orange
+ * names the plugin uses, so the dark block = `background=dark`, contrast "" (medium),
+ * and the light block = `background=light`.
+ *
+ * How nvim highlight groups were mapped:
+ *   Normal            -> editor background / text
+ *   CursorLine/Float  -> bg1  (code blocks, inline code, alt surfaces)
+ *   Visual            -> bg3  (text selection)
+ *   Search/IncSearch  -> yellow / orange (==highlight== and search matches)
+ *   Title/Directory   -> green bold (headings, folder names)
+ *   Underlined        -> blue + underline (links)
+ *   Delimiter/Special -> orange (list markers, heading #, code punctuation)
+ *   Comment           -> gray italic
+ *   @markup.raw       -> green italic (inline code)
+ *   @markup.list.*    -> checked = green, unchecked = gray
+ */
+
+/* ------------------------------------------------------------------ palette */
+
+.theme-dark {
+  --gb-bg0: #282828;
+  --gb-bg1: #3c3836;
+  --gb-bg2: #504945;
+  --gb-bg3: #665c54;
+  --gb-bg4: #7c6f64;
+  --gb-side: #1d2021;        /* dark0_hard: sidebars / ribbon / tab bar */
+  --gb-fg0: #fbf1c7;
+  --gb-fg1: #ebdbb2;
+  --gb-fg2: #d5c4a1;
+  --gb-fg3: #bdae93;
+  --gb-fg4: #a89984;
+  --gb-gray: #928374;
+
+  --gb-red: #fb4934;
+  --gb-green: #b8bb26;
+  --gb-yellow: #fabd2f;
+  --gb-blue: #83a598;
+  --gb-purple: #d3869b;
+  --gb-aqua: #8ec07c;
+  --gb-orange: #fe8019;
+
+  --gb-red-rgb: 251, 73, 52;
+  --gb-green-rgb: 184, 187, 38;
+  --gb-yellow-rgb: 250, 189, 47;
+  --gb-blue-rgb: 131, 165, 152;
+  --gb-purple-rgb: 211, 134, 155;
+  --gb-aqua-rgb: 142, 192, 124;
+  --gb-orange-rgb: 254, 128, 25;
+  --gb-pink-rgb: 177, 98, 134;   /* neutral_purple */
+  --gb-gray-rgb: 146, 131, 116;
+
+  --gb-accent-hsl: 61, 66%, 44%; /* hsl of --gb-green */
+  --gb-green-hover: #98971a;     /* neutral_green */
+  --gb-shadow: rgba(0, 0, 0, 0.45);
+
+  color-scheme: dark;
+}
+
+.theme-light {
+  --gb-bg0: #fbf1c7;
+  --gb-bg1: #ebdbb2;
+  --gb-bg2: #d5c4a1;
+  --gb-bg3: #bdae93;
+  --gb-bg4: #a89984;
+  --gb-side: #f2e5bc;        /* light0_soft */
+  --gb-fg0: #282828;
+  --gb-fg1: #3c3836;
+  --gb-fg2: #504945;
+  --gb-fg3: #665c54;
+  --gb-fg4: #7c6f64;
+  --gb-gray: #928374;
+
+  --gb-red: #9d0006;
+  --gb-green: #79740e;
+  --gb-yellow: #b57614;
+  --gb-blue: #076678;
+  --gb-purple: #8f3f71;
+  --gb-aqua: #427b58;
+  --gb-orange: #af3a03;
+
+  --gb-red-rgb: 157, 0, 6;
+  --gb-green-rgb: 121, 116, 14;
+  --gb-yellow-rgb: 181, 118, 20;
+  --gb-blue-rgb: 7, 102, 120;
+  --gb-purple-rgb: 143, 63, 113;
+  --gb-aqua-rgb: 66, 123, 88;
+  --gb-orange-rgb: 175, 58, 3;
+  --gb-pink-rgb: 177, 98, 134;
+  --gb-gray-rgb: 146, 131, 116;
+
+  --gb-accent-hsl: 57, 79%, 26%;
+  --gb-green-hover: #98971a;
+  --gb-shadow: rgba(60, 56, 54, 0.25);
+
+  color-scheme: light;
+}
+
+/* ------------------------------------------------- Obsidian variable mapping */
+
+.theme-dark,
+.theme-light {
+  /* base ladder (00 = editor background, 100 = main text) */
+  --color-base-00: var(--gb-bg0);
+  --color-base-05: var(--gb-bg0);
+  --color-base-10: var(--gb-bg1);
+  --color-base-20: var(--gb-bg1);
+  --color-base-25: var(--gb-bg1);
+  --color-base-30: var(--gb-bg2);
+  --color-base-35: var(--gb-bg3);
+  --color-base-40: var(--gb-bg4);
+  --color-base-50: var(--gb-gray);
+  --color-base-60: var(--gb-fg4);
+  --color-base-70: var(--gb-fg3);
+  --color-base-100: var(--gb-fg1);
+
+  /* named colors (callouts, graph, status colors all derive from these) */
+  --color-red: var(--gb-red);
+  --color-red-rgb: var(--gb-red-rgb);
+  --color-orange: var(--gb-orange);
+  --color-orange-rgb: var(--gb-orange-rgb);
+  --color-yellow: var(--gb-yellow);
+  --color-yellow-rgb: var(--gb-yellow-rgb);
+  --color-green: var(--gb-green);
+  --color-green-rgb: var(--gb-green-rgb);
+  --color-cyan: var(--gb-aqua);
+  --color-cyan-rgb: var(--gb-aqua-rgb);
+  --color-blue: var(--gb-blue);
+  --color-blue-rgb: var(--gb-blue-rgb);
+  --color-purple: var(--gb-purple);
+  --color-purple-rgb: var(--gb-purple-rgb);
+  --color-pink: var(--gb-purple);
+  --color-pink-rgb: var(--gb-pink-rgb);
+
+  /* accent: set directly so the "Accent color" in Settings > Appearance can't override it */
+  --color-accent: var(--gb-green);
+  --color-accent-1: var(--gb-green);
+  --color-accent-2: var(--gb-green-hover);
+  --color-accent-hsl: var(--gb-accent-hsl);
+  --interactive-accent: var(--gb-green);
+  --interactive-accent-hover: var(--gb-green-hover);
+  --interactive-accent-hsl: var(--gb-accent-hsl);
+  --text-on-accent: var(--gb-bg0);
+  --text-on-accent-inverted: var(--gb-bg0);
+
+  /* surfaces */
+  --background-primary: var(--gb-bg0);
+  --background-primary-alt: var(--gb-bg1);
+  --background-secondary: var(--gb-side);
+  --background-secondary-alt: var(--gb-bg0);
+  --background-modifier-border: var(--gb-bg1);
+  --background-modifier-border-hover: var(--gb-bg2);
+  --background-modifier-border-focus: var(--gb-bg3);
+  --background-modifier-form-field: var(--gb-bg1);
+  --background-modifier-box-shadow: var(--gb-shadow);
+  --background-modifier-cover: rgba(29, 32, 33, 0.85);
+  --background-modifier-hover: rgba(var(--gb-gray-rgb), 0.18);
+  --background-modifier-active-hover: rgba(var(--gb-green-rgb), 0.18);
+  --background-modifier-error: var(--gb-red);
+  --background-modifier-error-hover: var(--gb-red);
+  --background-modifier-success: var(--gb-green);
+
+  /* text */
+  --text-normal: var(--gb-fg1);
+  --text-muted: var(--gb-fg3);
+  --text-faint: var(--gb-gray);
+  --text-accent: var(--gb-green);
+  --text-accent-hover: var(--gb-green-hover);
+  --text-error: var(--gb-red);
+  --text-warning: var(--gb-yellow);
+  --text-success: var(--gb-green);
+  --text-selection: var(--gb-bg3);              /* nvim Visual */
+  --text-highlight-bg: var(--gb-yellow);        /* nvim Search */
+  --text-highlight-bg-active: var(--gb-orange); /* nvim IncSearch */
+
+  /* buttons / inputs (nvim Pmenu = bg2) */
+  --interactive-normal: var(--gb-bg2);
+  --interactive-hover: var(--gb-bg3);
+
+  /* icons */
+  --icon-color: var(--gb-fg4);
+  --icon-color-hover: var(--gb-fg1);
+  --icon-color-active: var(--gb-green);
+  --icon-color-focused: var(--gb-fg1);
+
+  /* headings: nvim renders every level as Title = green bold */
+  --h1-color: var(--gb-green);
+  --h2-color: var(--gb-green);
+  --h3-color: var(--gb-green);
+  --h4-color: var(--gb-green);
+  --h5-color: var(--gb-green);
+  --h6-color: var(--gb-green);
+  --h1-weight: 700;
+  --h2-weight: 700;
+  --h3-weight: 700;
+  --h4-weight: 700;
+  --h5-weight: 700;
+  --h6-weight: 700;
+
+  /* bold / italic keep the text color, like @markup.strong / @markup.italic */
+  --bold-color: var(--gb-fg1);
+  --italic-color: var(--gb-fg1);
+
+  /* links: nvim Underlined = blue + underline */
+  --link-color: var(--gb-blue);
+  --link-color-hover: var(--gb-blue);
+  --link-decoration: underline;
+  --link-decoration-hover: underline;
+  --link-external-color: var(--gb-blue);
+  --link-external-color-hover: var(--gb-blue);
+  --link-external-decoration: underline;
+  --link-external-decoration-hover: underline;
+  --link-unresolved-color: var(--gb-red);
+  --link-unresolved-opacity: 0.75;
+  --link-unresolved-decoration-style: dotted;
+  --link-unresolved-decoration-color: var(--gb-red);
+
+  /* lists / tasks: orange markers (Delimiter), green check, gray empty box */
+  --list-marker-color: var(--gb-orange);
+  --list-marker-color-hover: var(--gb-yellow);
+  --list-marker-color-collapsed: var(--gb-yellow);
+  --checkbox-color: var(--gb-green);
+  --checkbox-color-hover: var(--gb-green-hover);
+  --checkbox-border-color: var(--gb-gray);
+  --checkbox-border-color-hover: var(--gb-fg4);
+  --checklist-done-color: var(--gb-gray);
+  --indentation-guide: var(--gb-bg2);
+  --indentation-guide-active: var(--gb-bg4);
+
+  /* blockquote */
+  --blockquote-border-color: var(--gb-gray);
+  --blockquote-border-thickness: 3px;
+  --blockquote-color: var(--gb-fg1);
+  --blockquote-background-color: transparent;
+
+  /* hr (RenderMarkdownDash = bg4) */
+  --hr-color: var(--gb-bg4);
+
+  /* tables (RenderMarkdownTableHead = green bold) */
+  --table-border-color: var(--gb-bg2);
+  --table-header-border-color: var(--gb-bg3);
+  --table-header-color: var(--gb-green);
+  --table-header-weight: 700;
+  --table-header-background: transparent;
+  --table-header-background-hover: var(--gb-bg1);
+  --table-row-background-hover: var(--gb-bg1);
+
+  /* tags */
+  --tag-color: var(--gb-aqua);
+  --tag-color-hover: var(--gb-aqua);
+  --tag-background: rgba(var(--gb-aqua-rgb), 0.14);
+  --tag-background-hover: rgba(var(--gb-aqua-rgb), 0.24);
+  --tag-border-color: transparent;
+  --tag-border-color-hover: transparent;
+
+  /* code (RenderMarkdownCode = bg1; syntax colors from the @-groups in nvim) */
+  --code-background: var(--gb-bg1);
+  --code-normal: var(--gb-fg1);       /* @variable */
+  --code-comment: var(--gb-gray);     /* @comment */
+  --code-function: var(--gb-green);   /* @function */
+  --code-important: var(--gb-orange); /* @function.builtin / @constant.builtin */
+  --code-keyword: var(--gb-red);      /* @keyword */
+  --code-operator: var(--gb-orange);  /* @operator */
+  --code-property: var(--gb-blue);    /* @property */
+  --code-punctuation: var(--gb-orange); /* @punctuation.* */
+  --code-string: var(--gb-green);     /* @string */
+  --code-tag: var(--gb-orange);       /* @tag */
+  --code-value: var(--gb-purple);     /* @number / @boolean / @constant */
+
+  /* file explorer: nvim Directory = green bold, CursorLine = bg1, CursorLineNr = yellow */
+  --nav-item-color: var(--gb-fg1);
+  --nav-item-color-hover: var(--gb-fg0);
+  --nav-item-color-active: var(--gb-yellow);
+  --nav-item-color-selected: var(--gb-yellow);
+  --nav-item-color-highlighted: var(--gb-yellow);
+  --nav-item-background-hover: var(--gb-bg1);
+  --nav-item-background-active: var(--gb-bg1);
+  --nav-item-background-selected: var(--gb-bg1);
+
+  /* graph view */
+  --graph-line: var(--gb-bg2);
+  --graph-node: var(--gb-fg4);
+  --graph-node-unresolved: var(--gb-bg4);
+  --graph-node-focused: var(--gb-green);
+  --graph-node-tag: var(--gb-aqua);
+  --graph-node-attachment: var(--gb-yellow);
+  --graph-text: var(--gb-fg1);
+
+  /* scrollbars */
+  --scrollbar-bg: transparent;
+  --scrollbar-thumb-bg: var(--gb-bg2);
+  --scrollbar-active-thumb-bg: var(--gb-bg3);
+
+  /* callouts: render-markdown uses blue=info, aqua=hint, green=success, yellow=warn, red=error */
+  --callout-warning: var(--gb-yellow-rgb);
+  --callout-question: var(--gb-yellow-rgb);
+  --callout-quote: var(--gb-gray-rgb);
+}
+
+/* ------------------------------------------------------------- extra tweaks */
+
+/* ==highlight== looks like nvim Search: dark text on yellow */
+.markdown-rendered mark,
+.cm-s-obsidian span.cm-highlight {
+  color: var(--gb-bg0);
+}
+
+/* `inline code` = @markup.raw: green italic on bg1 */
+.markdown-rendered :not(pre) > code,
+.cm-s-obsidian span.cm-inline-code:not(.cm-formatting) {
+  color: var(--gb-green);
+  font-style: italic;
+}
+
+/* heading marks (#) are orange in nvim (@punctuation.special.markdown) */
+.cm-s-obsidian span.cm-formatting-header,
+.cm-s-obsidian span.cm-formatting-list {
+  color: var(--gb-orange);
+}
+
+/* folders look like nvim Directory: green + bold */
+.nav-folder-title-content {
+  color: var(--gb-green);
+  font-weight: 600;
+}
+
+/* code tokens that have no dedicated Obsidian variable */
+.token.class-name,
+.cm-s-obsidian span.cm-type {
+  color: var(--gb-yellow); /* @type */
+}
+.token.builtin {
+  color: var(--gb-orange);
+}
+.token.attr-name {
+  color: var(--gb-blue); /* @tag.attribute */
+}

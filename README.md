@@ -25,6 +25,7 @@ automatically in the background.
 | `config/yabai/` | yabai floating layout and mouse controls |
 | `config/opencode/` | OpenCode theme, session view, and MCP servers (Figma, Playwright) |
 | `apps/claude-code/` | Claude Code status line script and media/ping watcher |
+| `apps/obsidian/` | "Gruvbox Nvim" Obsidian theme, a port of the gruvbox.nvim palette (dark and light) |
 | `Brewfile` | Packages required by this configuration |
 | `inventory/` | Homebrew packages, Codex preferences, and Herdr layout/theme references |
 | `inventory/wallpaper/` | The desktop wallpaper in use (`rural.jpg`); a reference snapshot, not installed automatically |
@@ -153,6 +154,27 @@ The weather column is optional: it needs `~/.claude/statusline-location.json` co
 `{"latitude": 0.0, "longitude": 0.0}` with your own coordinates (git-ignored); without
 the file the column stays empty. The iCloud calendar is likewise optional through
 `~/.claude/statusline-icloud.json` (credentials, git-ignored, never added to the repo).
+
+## Obsidian theme
+
+`apps/obsidian/themes/Gruvbox Nvim/` makes Obsidian look like the Neovim setup. Its
+colors are taken from `ellisonleao/gruvbox.nvim` (dark, medium contrast, default
+options) and from the highlight groups Neovim actually resolves for markdown and
+`render-markdown.nvim`: green bold headings, blue underlined links, green italic inline
+code, orange list markers, and the syntax colors of Neovim's tree-sitter groups in code
+blocks. A gruvbox light variant is included for when macOS switches to light mode.
+
+It is restored manually and is not touched by `install.sh`: themes live inside each
+vault, and vault paths are personal.
+
+1. Copy the `Gruvbox Nvim` folder into `<vault>/.obsidian/themes/`.
+2. In Obsidian, open Settings → Appearance → Themes and select **Gruvbox Nvim**.
+
+The theme overrides the accent color from Settings → Appearance. Nothing else in a
+vault's `.obsidian/` folder (`appearance.json`, workspace, plugins) is backed up here.
+The copy in the repo is the source; after editing the copy inside a vault, copy it back
+before committing. If `contrast` or `palette_overrides` change in the Neovim config,
+update the `--gb-*` tokens at the top of `theme.css` to match.
 
 ## Activate on this Mac
 
