@@ -1,0 +1,13 @@
+theme = Gruvbox Dark
+background-opacity = 0.9
+background-blur = 20
+macos-window-buttons = hidden
+macos-titlebar-proxy-icon = hidden
+macos-titlebar-style = hidden
+
+# Send explicit modified-Tab sequences to Herdr (not Ghostty tab navigation).
+keybind = ctrl+tab=csi:9;5u
+keybind = ctrl+shift+tab=csi:9;6u
+
+# Preserve Ctrl+Shift+B distinctly from Ctrl+B for Herdr's sidebar toggle.
+keybind = ctrl+shift+b=csi:98;6u

@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# Leave automatic window placement to macOS; use yabai for manual window controls.
+/opt/homebrew/bin/yabai -m config layout float
+
+# Optional mouse controls for floating windows.
+/opt/homebrew/bin/yabai -m config mouse_modifier alt
+/opt/homebrew/bin/yabai -m config mouse_action1 move
+/opt/homebrew/bin/yabai -m config mouse_action2 resize

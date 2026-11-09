@@ -1,0 +1,41 @@
+.DS_Store
+*.log
+*.swp
+*.swo
+*.backup*
+__pycache__/
+.backups/
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+auth.json
+hosts.yml
+credentials*
+*history*
+ticktick-cli/
+cache/
+node_modules/
+.zcompdump*
+config/zsh/local.zsh
+home/.zshrc.local
+apps/vscode/mcp.json
+# OpenCode: service.json holds a password; status line: iCloud CalDAV credentials and the
+# owner's weather coordinates.
+config/opencode/service.json
+apps/claude-code/statusline-icloud.json
+apps/claude-code/statusline-location.json
+# Local-only: Spicetify's prefs_path is an absolute path that contains the macOS username.
+config/spicetify/config-xpui.ini
+# Wallpaper copies are kept out of the public repo (provenance unknown).
+inventory/wallpaper/
+*.sock
+*.sock.*
+
+# Herdr: only reviewed preferences, never sessions, logs, or runtime state.
+/config/herdr/*
+!/config/herdr/config.toml
+/config/herdr-app/*
+!/config/herdr-app/keys.json
+!/config/herdr-app/settings.json

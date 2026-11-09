@@ -1,0 +1,21 @@
+{
+  "mcp": {
+    "servers": {
+      "figma": {
+        "type": "remote",
+        "url": "https://mcp.figma.com/mcp"
+      },
+      "playwright": {
+        "type": "local",
+        "command": [
+          "npx",
+          "-y",
+          "@playwright/mcp@latest",
+          "--headless",
+          "--isolated",
+          "--viewport-size=1440,1000"
+        ]
+      }
+    }
+  }
+}

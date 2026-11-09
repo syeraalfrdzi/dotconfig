@@ -1,0 +1,16 @@
+onboarding = false
+
+[keys]
+next_tab = "ctrl+tab"
+previous_tab = "ctrl+shift+tab"
+toggle_sidebar = ["prefix+b", "ctrl+shift+b"]
+
+[theme]
+name = "gruvbox"
+auto_switch = false
+
+[ui.toast]
+delivery = "system"
+
+[ui.sound]
+enabled = true

@@ -1,0 +1,20 @@
+# Control: resize the active floating window by 40px
+# H/L adjust width; K/J adjust height.
+ctrl - h : /opt/homebrew/bin/yabai -m window --resize right:-40:0
+ctrl - l : /opt/homebrew/bin/yabai -m window --resize right:40:0
+ctrl - k : /opt/homebrew/bin/yabai -m window --resize bottom:0:-40
+ctrl - j : /opt/homebrew/bin/yabai -m window --resize bottom:0:40
+
+# Control + Option: move the active floating window by 40px.
+ctrl + alt - h : /opt/homebrew/bin/yabai -m window --move rel:-40:0
+ctrl + alt - j : /opt/homebrew/bin/yabai -m window --move rel:0:40
+ctrl + alt - k : /opt/homebrew/bin/yabai -m window --move rel:0:-40
+ctrl + alt - l : /opt/homebrew/bin/yabai -m window --move rel:40:0
+
+# Control + Shift + H/L: move and follow the active window to the previous/next desktop.
+ctrl + shift - h : /bin/sh "$HOME/.config/skhd/move-window.sh" space prev
+ctrl + shift - l : /bin/sh "$HOME/.config/skhd/move-window.sh" space next
+
+# Control + Shift + J/K: move and follow the active window to the previous/next monitor.
+ctrl + shift - j : /bin/sh "$HOME/.config/skhd/move-window.sh" display prev
+ctrl + shift - k : /bin/sh "$HOME/.config/skhd/move-window.sh" display next

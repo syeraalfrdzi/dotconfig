@@ -1,0 +1,12 @@
+boring-notch
+bot-framework-emulator
+copilot-cli
+emacs-app
+font-fira-code-nerd-font
+monitorcontrol
+oh-my-posh
+omnidisksweeper
+powerflow
+publish-or-perish
+visual-studio-code
+warp
