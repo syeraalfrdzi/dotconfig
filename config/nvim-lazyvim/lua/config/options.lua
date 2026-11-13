@@ -7,3 +7,7 @@ vim.opt.relativenumber = false
 
 -- Use the workspace TypeScript service for Next.js and React development.
 vim.g.lazyvim_ts_lsp = "vtsls"
+
+-- Copilot tampil sebagai ghost text (bukan item di menu blink).
+-- Kembalikan ke `true` kalau mau saran Copilot masuk ke menu lagi.
+vim.g.ai_cmp = false

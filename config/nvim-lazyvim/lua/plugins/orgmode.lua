@@ -155,6 +155,9 @@ end
 return {
   {
     "nvim-orgmode/orgmode",
+    -- Ikuti commit terbaru di branch master. config/org_notifications.lua memakai
+    -- API yang belum ada di rilis 0.7.5 (OrgFile:parse_async, Promise.yield).
+    version = false,
     -- WAJIB: load sebelum deteksi filetype untuk file .org.
     -- Kalau hanya "VeryLazy", ftplugin/org.lua tidak pernah di-source saat
     -- `nvim file.org` dijalankan dari startup, sehingga semua mapping
